@@ -1,0 +1,5 @@
+
+TestNG 装配@Autowired bean为null:
+1.测试类添加注解@SpringBootTest
+2.测试类继承AbstractTestNGSpringContextTests
+3.service添加注解@Autowired
