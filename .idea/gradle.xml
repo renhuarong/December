@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/december-common" />
             <option value="$PROJECT_DIR$/december-core" />
             <option value="$PROJECT_DIR$/december-domain" />
+            <option value="$PROJECT_DIR$/december-tool" />
           </set>
         </option>
       </GradleProjectSettings>

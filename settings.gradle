@@ -3,4 +3,5 @@ include 'december-api'
 include 'december-core'
 include 'december-common'
 include 'december-domain'
+include 'december-tool'
 

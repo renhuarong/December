@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.decemberdomain.dao.DeductAuditRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.example.decemberdomain.model.DeductAuditRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="audit_mode" property="auditMode" jdbcType="TINYINT" />
+    <result column="mall_id" property="mallId" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="deduct_type" property="deductType" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="auditors" property="auditors" jdbcType="VARCHAR" />
+    <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="related_id" property="relatedId" jdbcType="BIGINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="mall_name" property="mallName" jdbcType="VARCHAR" />
+    <result column="out_id" property="outId" jdbcType="VARCHAR" />
+    <result column="create_source" property="createSource" jdbcType="INTEGER" />
+    <result column="gray" property="gray" jdbcType="INTEGER" />
+    <result column="pay_out_id" property="payOutId" jdbcType="VARCHAR" />
+    <result column="related_batch_id" property="relatedBatchId" jdbcType="VARCHAR" />
+    <result column="batch_id" property="batchId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, audit_mode, mall_id, amount, status, deduct_type, creator, auditors, audit_time, 
+    message, note, type, related_id, created_at, updated_at, mall_name, out_id, create_source, 
+    gray, pay_out_id, related_batch_id, batch_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.decemberdomain.model.DeductAuditRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deduct_audit_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from deduct_audit_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from deduct_audit_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.decemberdomain.model.DeductAuditRecordExample" >
+    delete from deduct_audit_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.decemberdomain.model.DeductAuditRecord" useGeneratedKeys="true" keyProperty="id" >
+    insert into deduct_audit_record (audit_mode, mall_id, amount, 
+      status, deduct_type, creator, 
+      auditors, audit_time, message, 
+      note, type, related_id, 
+      created_at, updated_at, mall_name, 
+      out_id, create_source, gray, 
+      pay_out_id, related_batch_id, batch_id
+      )
+    values (#{auditMode,jdbcType=TINYINT}, #{mallId,jdbcType=BIGINT}, #{amount,jdbcType=BIGINT}, 
+      #{status,jdbcType=TINYINT}, #{deductType,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, 
+      #{auditors,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, #{message,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{relatedId,jdbcType=BIGINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{mallName,jdbcType=VARCHAR}, 
+      #{outId,jdbcType=VARCHAR}, #{createSource,jdbcType=INTEGER}, #{gray,jdbcType=INTEGER}, 
+      #{payOutId,jdbcType=VARCHAR}, #{relatedBatchId,jdbcType=VARCHAR}, #{batchId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.decemberdomain.model.DeductAuditRecord" useGeneratedKeys="true" keyProperty="id" >
+    insert into deduct_audit_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="auditMode != null" >
+        audit_mode,
+      </if>
+      <if test="mallId != null" >
+        mall_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="deductType != null" >
+        deduct_type,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="auditors != null" >
+        auditors,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="relatedId != null" >
+        related_id,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="mallName != null" >
+        mall_name,
+      </if>
+      <if test="outId != null" >
+        out_id,
+      </if>
+      <if test="createSource != null" >
+        create_source,
+      </if>
+      <if test="gray != null" >
+        gray,
+      </if>
+      <if test="payOutId != null" >
+        pay_out_id,
+      </if>
+      <if test="relatedBatchId != null" >
+        related_batch_id,
+      </if>
+      <if test="batchId != null" >
+        batch_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="auditMode != null" >
+        #{auditMode,jdbcType=TINYINT},
+      </if>
+      <if test="mallId != null" >
+        #{mallId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="deductType != null" >
+        #{deductType,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="auditors != null" >
+        #{auditors,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relatedId != null" >
+        #{relatedId,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallName != null" >
+        #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="outId != null" >
+        #{outId,jdbcType=VARCHAR},
+      </if>
+      <if test="createSource != null" >
+        #{createSource,jdbcType=INTEGER},
+      </if>
+      <if test="gray != null" >
+        #{gray,jdbcType=INTEGER},
+      </if>
+      <if test="payOutId != null" >
+        #{payOutId,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedBatchId != null" >
+        #{relatedBatchId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.decemberdomain.model.DeductAuditRecordExample" resultType="java.lang.Integer" >
+    select count(*) from deduct_audit_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deduct_audit_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.auditMode != null" >
+        audit_mode = #{record.auditMode,jdbcType=TINYINT},
+      </if>
+      <if test="record.mallId != null" >
+        mall_id = #{record.mallId,jdbcType=BIGINT},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.deductType != null" >
+        deduct_type = #{record.deductType,jdbcType=INTEGER},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditors != null" >
+        auditors = #{record.auditors,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null" >
+        audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.relatedId != null" >
+        related_id = #{record.relatedId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mallName != null" >
+        mall_name = #{record.mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outId != null" >
+        out_id = #{record.outId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createSource != null" >
+        create_source = #{record.createSource,jdbcType=INTEGER},
+      </if>
+      <if test="record.gray != null" >
+        gray = #{record.gray,jdbcType=INTEGER},
+      </if>
+      <if test="record.payOutId != null" >
+        pay_out_id = #{record.payOutId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relatedBatchId != null" >
+        related_batch_id = #{record.relatedBatchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchId != null" >
+        batch_id = #{record.batchId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deduct_audit_record
+    set id = #{record.id,jdbcType=BIGINT},
+      audit_mode = #{record.auditMode,jdbcType=TINYINT},
+      mall_id = #{record.mallId,jdbcType=BIGINT},
+      amount = #{record.amount,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=TINYINT},
+      deduct_type = #{record.deductType,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      auditors = #{record.auditors,jdbcType=VARCHAR},
+      audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      message = #{record.message,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      related_id = #{record.relatedId,jdbcType=BIGINT},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      mall_name = #{record.mallName,jdbcType=VARCHAR},
+      out_id = #{record.outId,jdbcType=VARCHAR},
+      create_source = #{record.createSource,jdbcType=INTEGER},
+      gray = #{record.gray,jdbcType=INTEGER},
+      pay_out_id = #{record.payOutId,jdbcType=VARCHAR},
+      related_batch_id = #{record.relatedBatchId,jdbcType=VARCHAR},
+      batch_id = #{record.batchId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.decemberdomain.model.DeductAuditRecord" >
+    update deduct_audit_record
+    <set >
+      <if test="auditMode != null" >
+        audit_mode = #{auditMode,jdbcType=TINYINT},
+      </if>
+      <if test="mallId != null" >
+        mall_id = #{mallId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="deductType != null" >
+        deduct_type = #{deductType,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="auditors != null" >
+        auditors = #{auditors,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="relatedId != null" >
+        related_id = #{relatedId,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mallName != null" >
+        mall_name = #{mallName,jdbcType=VARCHAR},
+      </if>
+      <if test="outId != null" >
+        out_id = #{outId,jdbcType=VARCHAR},
+      </if>
+      <if test="createSource != null" >
+        create_source = #{createSource,jdbcType=INTEGER},
+      </if>
+      <if test="gray != null" >
+        gray = #{gray,jdbcType=INTEGER},
+      </if>
+      <if test="payOutId != null" >
+        pay_out_id = #{payOutId,jdbcType=VARCHAR},
+      </if>
+      <if test="relatedBatchId != null" >
+        related_batch_id = #{relatedBatchId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        batch_id = #{batchId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.decemberdomain.model.DeductAuditRecord" >
+    update deduct_audit_record
+    set audit_mode = #{auditMode,jdbcType=TINYINT},
+      mall_id = #{mallId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      deduct_type = #{deductType,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=VARCHAR},
+      auditors = #{auditors,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      message = #{message,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      related_id = #{relatedId,jdbcType=BIGINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      mall_name = #{mallName,jdbcType=VARCHAR},
+      out_id = #{outId,jdbcType=VARCHAR},
+      create_source = #{createSource,jdbcType=INTEGER},
+      gray = #{gray,jdbcType=INTEGER},
+      pay_out_id = #{payOutId,jdbcType=VARCHAR},
+      related_batch_id = #{relatedBatchId,jdbcType=VARCHAR},
+      batch_id = #{batchId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.example.decemberdomain.model.DeductAuditRecordExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deduct_audit_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
